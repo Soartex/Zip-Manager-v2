@@ -37,7 +37,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
     </ul>
     <?php
 	// Get data
-	$string = file_get_contents("./options.json");
+	$string = file_get_contents("../data/options.json");
 	$json = json_decode($string, true);
 	// Get the keys/presets
 	$preset_array = array_keys($json);
@@ -47,16 +47,19 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
       <col span='1' style='width: 40%;'>
       <col span='1' style='width: 60%;'>
       </colgroup>
+      <thead>
+        <tr>
+          <th>Preset Profile</th>
+          <th>Custom Profile</th>
+        </tr>
+      </thead>
       <tbody>
         <tr>
-          <th> 
-          <h3>Preset Profile</h3>
-          <hr>
-          <form action="assets/UpdateSession.php" method="post">
+          <th> <form action="./UpdateOptions.php" method="post">
               <!--Presets--> 
               <span class="help-block">Profile Presets</span>
               <select name="profile">
-              <?php
+                <?php
 			  foreach($preset_array as &$profile) {
                 echo "<option>".$profile."</option>";
 			  }
@@ -66,14 +69,11 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
               <button class="btn btn-success" type="submit" name="submitPreset"> Submit Preset </button>
             </form>
           </th>
-          <th> 
-          <h3>Custom Profile</h3>
-          <hr>
-          <form action="assets/UpdateSession.php" method="post">
+          <th> <form action="./UpdateOptions.php" method="post">
               <!--Github Username--> 
               <span class="help-block">Github Username</span>
               <select name="gitUsername">
-              <?php
+                <?php
 			  foreach($preset_array as &$profile) {
                 echo "<option>".$json[$profile]["GithubUsername"]."</option>";
 			  }
@@ -83,7 +83,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
               <!--Github Repo--> 
               <span class="help-block">Github Repository</span>
               <select name="gitRepo">
-              <?php
+                <?php
 			  foreach($preset_array as &$profile) {
                 echo "<option>".$json[$profile]["GithubRepo"]."</option>";
 			  }
@@ -93,7 +93,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
               <!--Repo Branch--> 
               <span class="help-block">Repository Branch</span>
               <select name="gitBranch">
-              <?php
+                <?php
 			  foreach($preset_array as &$profile) {
                 echo "<option>".$json[$profile]["RepoBranch"]."</option>";
 			  }
@@ -103,7 +103,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
               <!--Github Dir--> 
               <span class="help-block">Github Directory to Mod Folders</span>
               <select name="gitDirectory">
-              <?php
+                <?php
 			  foreach($preset_array as &$profile) {
                 echo "<option>".$json[$profile]["GithubDir"]."</option>";
 			  }
@@ -113,7 +113,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
               <!--Patcher Config--> 
               <span class="help-block">Patcher Config</span>
               <select name="patcherConfig">
-              <?php
+                <?php
 			  foreach($preset_array as &$profile) {
                 echo "<option>".$json[$profile]["PatcherConfig"]."</option>";
 			  }
@@ -123,7 +123,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
               <!--Local Dir--> 
               <span class="help-block">Server Location of Mod Directory</span>
               <select name="zipDirectory">
-              <?php
+                <?php
 			  foreach($preset_array as &$profile) {
                 echo "<option>".$json[$profile]["ServerLocation"]."</option>";
 			  }
@@ -139,7 +139,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
   </div>
 </div>
 <!-- Footer -->
-<?php require 'assets/presets/footer.php'; ?>
+<?php require '../assets/presets/footer.php'; ?>
 </body>
 <!-- Javascripts -->
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>

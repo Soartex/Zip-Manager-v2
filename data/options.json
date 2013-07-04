@@ -4,7 +4,7 @@
         "GithubRepo": "Soartex-Textures",
         "RepoBranch": "master",
         "GithubDir": "",
-        "PatcherConfig": "http://soartex.net/texture-patcher/data/config.json",
+        "PatcherConfig": "data/patcher/config(1.5.x).json",
         "ServerLocation": "mods/"
     },
     "Soartex 1.4.x": {
@@ -12,7 +12,7 @@
         "GithubRepo": "Soartex-Textures",
         "RepoBranch": "1.4.x",
         "GithubDir": "",
-        "PatcherConfig": "http://soartex.net/texture-patcher/data/archives/config(1.4.x).json",
+        "PatcherConfig": "data/patcher/config(1.4.x).json",
         "ServerLocation": "archives/MC 1.4.x/mods/"
     },
     "Soartex 1.3.x-pre": {
@@ -20,7 +20,7 @@
         "GithubRepo": "Soartex-Textures",
         "RepoBranch": "1.3.x-pre",
         "GithubDir": "",
-        "PatcherConfig": "http://soartex.net/texture-patcher/data/archives/config(1.3.x-pre).json",
+        "PatcherConfig": "data/patcher/config(1.3.x-pre).json",
         "ServerLocation": "archives/MC 1.3.x-pre/mods/"
     }
 }
