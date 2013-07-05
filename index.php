@@ -28,7 +28,7 @@
   <div class="main-content">
     <h1>Soartex Fanver <small>Zip Manager</small></h1>
     <hr>
-    <p>This system allows for complete control of the soartex modded patcher and zip archives. With this a user can sync a zip file from github and then also updated the patcher.json. This system allow for community members to updated zips and allow for soartex fanver users to get the latest textures. Enjoy the system!</p>
+    <p>This system allows for complete control of the soartex modded patcher and zip archives. With this a user can sync a zip file from github and then also updated the patcher.json.All patcher.jsons can all be found here: <a href="http://files.soartex.net/zip-manager/data/patcher/">files.soartex.net/zip-manager/data/patcher/</a>This system allow for community members to updated zips and allow for soartex fanver users to get the latest textures. Enjoy the system!</p>
     <h4>Contains</h4>
     <ul>
 	  <li>Soartex 1.6.x</li>
