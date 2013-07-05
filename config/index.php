@@ -9,6 +9,35 @@ if(!isset($_GET['fileName'])){
 	header("Location: ../browse/"); 
     exit; 
 }
+
+// If config form is posted
+if(!empty($_POST)){
+	$errors = array();
+	$successes = array();
+	// If create a new zip
+		if(preg_match('/"/', $_POST['modVersion'])===0 && preg_match('/"/', $_POST['mcVersion'])===0){
+			// Read in json file
+			// Patcher config
+			$string = file_get_contents("../".$_SESSION['patcherConfig']);
+			$patcher_json = json_decode($string, true);
+			// Add spaces and remove ending, find the mod in the json
+			$filename = preg_replace("/\\.[^.\\s]{3,4}$/", "", $_POST['fileName']);
+			$filename = str_replace('_', ' ', $filename);
+			// Change config
+			$patcher_json["mods"][$filename]["version"] = $_POST['modVersion'];
+			$patcher_json["mods"][$filename]["mcversion"] = $_POST['mcVersion'];
+			//output file
+			$fp = fopen("../".$_SESSION['patcherConfig'], 'w');
+			fwrite($fp, json_encode($patcher_json, JSON_PRETTY_PRINT));
+			fclose($fp);
+			//redirect
+			header("Location: ../browse/"); 
+   			exit;
+		}
+		else{
+			$errors[] = "Data can not contain quotes!";
+		}
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -44,7 +73,27 @@ if(!isset($_GET['fileName'])){
       <li><a href="../browse/">Browse</a> <span class="divider">/</span></li>
       <li class="active">Config</li>
     </ul>
-	<h3>This is not done yet, it is a wip</h3>
+    <?php 
+	// Errors/success
+	echo resultBlock($errors,$successes);
+	// Read in json file
+	// Patcher config
+	$string = file_get_contents("../".$_SESSION['patcherConfig']);
+	$patcher_json = json_decode($string, true);
+	// Add spaces and remove ending, find the mod in the json
+	$filename = preg_replace("/\\.[^.\\s]{3,4}$/", "", $_GET['fileName']);
+	$filename = str_replace('_', ' ', $filename);
+	?>
+    <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+    	<h3>Edit your config for: <?php echo $filename; ?></h3>
+        <span class="help-block">Mod version</span>
+        <input class="span4" type="text" value="<?php echo $patcher_json["mods"][$filename]["version"]; ?>" name="modVersion">
+        <span class="help-block">Minecraft Version</span>
+        <input class="span4" type="text" value="<?php echo $patcher_json["mods"][$filename]["mcversion"]; ?>" name="mcVersion">
+        <input type="hidden" name="fileName" value="<?php echo $_GET['fileName'] ?>">
+        <br>
+        <button class="btn btn-success" type="submit" name="submit">Submit</button>
+	</form>
   </div>
 </div>
 <!-- Footer -->
