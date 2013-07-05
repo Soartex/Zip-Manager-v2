@@ -5,7 +5,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
 	header("Location: ../");
 	die();
 }
-if(!isset($_GET['fileName'])){
+if(!isset($_REQUEST['fileName'])){
 	header("Location: ../browse/"); 
     exit; 
 }
@@ -58,7 +58,7 @@ function toggleDiv(divId) {
 		try{
 			//create temp location
 			echo "<div class='page-header'><h3>Creating Temp Folder</h3></div>";
-			$fileNoExt = preg_replace("/\\.[^.\\s]{3,4}$/", "", $_GET['fileName']);	
+			$fileNoExt = preg_replace("/\\.[^.\\s]{3,4}$/", "", $_REQUEST['fileName']);	
 			
 			$maintempDirectory =$_SESSION['zipDirectory']."temp";
 			$tempDirectory = $maintempDirectory."/".$fileNoExt;
@@ -176,7 +176,7 @@ function toggleDiv(divId) {
 			//remove old zip and zip new files
 			echo "<div class='page-header'><h3>Creating Zip Archives</h3></div>";
 	
-			$outputFile = $_SESSION['zipDirectory'].$_GET['fileName'];
+			$outputFile = $_SESSION['zipDirectory'].$_REQUEST['fileName'];
 			echo("<div class='alert alert-info'>Output File: ".$outputFile."<br>");
 	
 			$outputDir = $_SESSION['zipDirectory'];

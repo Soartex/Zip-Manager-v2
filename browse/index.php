@@ -5,6 +5,11 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
 	header("Location: ../");
 	die();
 }
+
+if($_SESSION['gitUsername']===""){
+	header("Location: ../options/");
+	die();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,7 +95,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
 			echo "<td>".$patcher_json["mods"][$filename]["mcversion"]."</td>";
 			echo '<td>
 				<div class="btn-group" style="width:100%;">
-					<a class="btn btn-mini btn-success" href="../update/?fileName='.$temp.'">Update Zip</a>
+					<a class="btn btn-mini btn-success" href="../update/index.php?fileName='.$temp.'">Update Zip</a>
 					<button class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
