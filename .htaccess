@@ -1,2 +1,2 @@
-ErrorDocument 404 /assets/presets/error_404.php
-ErrorDocument 500 /assets/presets/error_505.php
+ErrorDocument 404 http://files.soartex.net/assets/presets/error_404.php
+ErrorDocument 500 http://files.soartex.net/assets/presets/error_505.php
