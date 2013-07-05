@@ -1,12 +1,4 @@
 <?php
-//check user login
-session_start(); 
-if(!$_SESSION['logged']){ 
-    header("Location: index.php"); 
-    exit; 
-} 
-?>
-<?php
 class Zip_Archiver {
 	//ex: Zip('/folder/to/compress/', './compressed.zip');
 	static function Zip($source, $destination) {

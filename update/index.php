@@ -5,7 +5,7 @@ if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
 	header("Location: ../");
 	die();
 }
-if(!isset($_REQUEST['fileName'])){
+if(!isset($_GET['fileName'])){
 	header("Location: ../browse/"); 
     exit; 
 }
@@ -48,8 +48,8 @@ function toggleDiv(divId) {
       <li><a href="../options/">Options</a> <span class="divider">/</span></li>
       <li><a href="../browse/">Browse</a> <span class="divider">/</span></li>
       <li class="active">Update</li>
-    </ul>    
-		<?php 
+    </ul>
+    <?php 
 		//Require helper methods
 		require './Helpers.php';
 		require './Zip_Archiver.php';
@@ -58,7 +58,7 @@ function toggleDiv(divId) {
 		try{
 			//create temp location
 			echo "<div class='page-header'><h3>Creating Temp Folder</h3></div>";
-			$fileNoExt = preg_replace("/\\.[^.\\s]{3,4}$/", "", $_REQUEST['fileName']);	
+			$fileNoExt = preg_replace("/\\.[^.\\s]{3,4}$/", "", $_GET['fileName']);	
 			
 			$maintempDirectory =$_SESSION['zipDirectory']."temp";
 			$tempDirectory = $maintempDirectory."/".$fileNoExt;
@@ -84,8 +84,6 @@ function toggleDiv(divId) {
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($curl,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
-			
-			//curl_setopt($curl, CONNECTTIMEOUT, 1);
 			$content = curl_exec($curl);
 			curl_close($curl);
 
@@ -176,7 +174,7 @@ function toggleDiv(divId) {
 			//remove old zip and zip new files
 			echo "<div class='page-header'><h3>Creating Zip Archives</h3></div>";
 	
-			$outputFile = $_SESSION['zipDirectory'].$_REQUEST['fileName'];
+			$outputFile = $_SESSION['zipDirectory'].$_GET['fileName'];
 			echo("<div class='alert alert-info'>Output File: ".$outputFile."<br>");
 	
 			$outputDir = $_SESSION['zipDirectory'];
@@ -215,7 +213,7 @@ function toggleDiv(divId) {
 			echo '<div class="alert alert-success">Success: Removed Temp Directory</div>';
 		}
 		?>
-	</div>
+  </div>
 </div>
 <!-- Footer -->
 <?php require '../assets/presets/footer.php'; ?>

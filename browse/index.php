@@ -10,6 +10,21 @@ if($_SESSION['gitUsername']===""){
 	header("Location: ../options/");
 	die();
 }
+
+if(!empty($_POST)){
+	$errors = array();
+	$successes = array();
+	// If create a new zip
+	if(isset($_POST['submit'])){
+		$outputFile = $_SESSION['zipDirectory'].$_POST['newzip'];
+		if(substr_compare($outputFile, ".zip", -strlen(".zip"), strlen(".zip")) === 0){
+			touch($outputFile);
+			$successes[] = "Successfully created file: ".$outputFile;
+		}else{
+			$errors[] = "Could not create file, must end with a .zip";
+		}
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,6 +42,9 @@ if($_SESSION['gitUsername']===""){
 <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-responsive.css" />
 <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/global.css" />
+<!-- Javascripts -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
 </head>
 <body>
 <!--Header-->
@@ -54,6 +72,8 @@ if($_SESSION['gitUsername']===""){
 		echo "[Local Zip Directory]: ".$_SESSION['zipDirectory']."<br>";
 		?>
     </div>
+    <!--Errors/success-->
+    <?php echo resultBlock($errors,$successes);?>
     <!--Master Mod Table-->
     <table class="table table-hover table-bordered">
       <thead>
@@ -67,11 +87,10 @@ if($_SESSION['gitUsername']===""){
       </thead>
       <tbody>
         <?php
-		//patcher config
-		// Get data
+		// Patcher config
 		$string = file_get_contents("../".$_SESSION['patcherConfig']);
 		$patcher_json = json_decode($string, true);
-		//file names data
+		// File names data
 		$filesData = array();
 		if ($dir_list = opendir($_SESSION['zipDirectory'])){
 			while(($filename = readdir($dir_list)) !== false){
@@ -95,33 +114,24 @@ if($_SESSION['gitUsername']===""){
 			echo "<td>".$patcher_json["mods"][$filename]["mcversion"]."</td>";
 			echo '<td>
 				<div class="btn-group" style="width:100%;">
-					<a class="btn btn-mini btn-success" href="../update/index.php?fileName='.$temp.'">Update Zip</a>
+					<a class="btn btn-mini btn-success" href="../update/?fileName='.$temp.'">Update Zip</a>
 					<button class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<li><a href=""><i class="icon-wrench"></i> Update Config</a></li>
+						<li><a href="../config/?fileName='.$temp.'"><i class="icon-wrench"></i> Update Config</a></li>
 						<li><a href="'.$_SESSION['zipDirectory'].$temp.'"><i class="icon-download-alt"></i> Download Zip</a></li>
-						<li><a onclick="deleteClicked('.$temp.')" href="#"><i class="icon-trash"></i> Delete Zip</a></li>
+						<li><a href="./deletezip.php?fileName='.$temp.'"><i class="icon-trash"></i> Delete Zip</a></li>
 					</ul>
 				</div>
 			</td>';
 			echo "</tr>";
 		}// End of foreach
-		/*
-		<td>
-		<div class="btn-group"> 
-		<a class="btn btn-mini btn-success" href=<?php echo "UpdateZip.php?fileName=".$temp; ?>>Update Zip</a> 
-		<a class="btn btn-mini btn-danger" onclick="deleteClicked('<?php echo $temp?>')" href="#"><i class="icon-trash icon-white"></i> Delete</a> 
-		<a class="btn btn-mini" href="<?php echo $_SESSION['zipDirectory'].$temp; ?>"><?php echo $temp; ?></a> 
-		</div>
-		</td>*/
 		?>
         </tbody>
-      
     </table>
     <!--Form for adding a new zip-->
-    <form action="assets/AddFile.php" method="post">
+    <form id="my_form" action="<?php $_SERVER['PHP_SELF']?>" method="post">
       <div class="form-horizontal">
         <input type="text" name="newzip" placeholder="Filename.zip">
         <button class="btn btn-success" type="submit" name="submit">Add Zip File</button>
@@ -132,19 +142,4 @@ if($_SESSION['gitUsername']===""){
 <!-- Footer -->
 <?php require '../assets/presets/footer.php'; ?>
 </body>
-<!-- Javascripts -->
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
-<script type="text/javascript" src="../assets/js/bootbox.min.js"></script>
-<script>
-		//function for delete popup
-		function deleteClicked(arg0) {
-			bootbox.confirm("Do you want to delete this: <b>/"+arg0+"</b>", function(result) {
-				if(result === true){
-					//redirect to worker
-					window.location = "assets/DeleteFile.php?fileName="+arg0;
-				}				
-			}); 
-		}
-    </script>
 </html>
