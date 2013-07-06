@@ -1,11 +1,19 @@
 {
-    "Soartex 1.5.x": {
+    "Soartex 1.6.x": {
         "GithubUsername": "Soartex-Fanver",
         "GithubRepo": "Soartex-Textures",
         "RepoBranch": "master",
         "GithubDir": "",
-        "PatcherConfig": "data/patcher/config(1.5.x).json",
+        "PatcherConfig": "data/patcher/config(1.6.x).json",
         "ServerLocation": "mods/"
+    },
+    "Soartex 1.5.x": {
+        "GithubUsername": "Soartex-Fanver",
+        "GithubRepo": "Soartex-Textures",
+        "RepoBranch": "1.5.x",
+        "GithubDir": "",
+        "PatcherConfig": "data/patcher/config(1.5.x).json",
+        "ServerLocation": "archives/MC 1.5.x/mods/"
     },
     "Soartex 1.4.x": {
         "GithubUsername": "Soartex-Fanver",
