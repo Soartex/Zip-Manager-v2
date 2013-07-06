@@ -26,6 +26,8 @@ if(!empty($_POST)){
 			// Change config
 			$patcher_json["mods"][$filename]["version"] = $_POST['modVersion'];
 			$patcher_json["mods"][$filename]["mcversion"] = $_POST['mcVersion'];
+			//sort
+			ksort($patcher_json["mods"]);
 			//output file
 			$fp = fopen("../".$_SESSION['patcherConfig'], 'w');
 			fwrite($fp, json_encode($patcher_json, JSON_PRETTY_PRINT));
