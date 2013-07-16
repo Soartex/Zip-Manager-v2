@@ -144,8 +144,10 @@ function toggleDiv(divId) {
 			//downlaod the files
 			$downloadUrl = 'https://raw.github.com/' . $_SESSION['gitUsername'] . '/' . $_SESSION['gitRepo'] . '/' .$_SESSION['gitBranch'] . '/';
 			foreach ($filesToDownload as &$file) {
+			// Replace all spaces with url %20
+			$newDownloadUrl = str_replace(' ','%20',$downloadUrl.$file['path']);
 			//download /dir/image.png to /newdir/image2.png
-			if (copy($downloadUrl.$file['path'], $maintempDirectory.'/'.$file['path']))
+			if (copy($newDownloadUrl, $maintempDirectory.'/'.$file['path']))
 				$success[] = "Success: ".$file['path']."<br>";
 			else
 				$error[] = 'Error: Unable to download- '. $file['path']."<br>";
