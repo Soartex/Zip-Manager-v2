@@ -1,10 +1,8 @@
-<?php $url_add=""; require 'assets/cake/cake.php'; ?>
-<!-- Copyright Soartex Fanver Team -->
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
 <!-- Page information -->
-<title>Soartex Fanver</title>
+<title>Zip Manager</title>
 <meta charset="UTF-8"/>
 <!-- Icons -->
 <link rel="shortcut icon" href="assets/img/favicon.ico" />
@@ -22,38 +20,17 @@
 <!-- End of Google Analytics -->
 </head>
 <body>
-<!--Header-->
-<?php $url_add=""; require 'assets/presets/header.php'; ?>
-<div class="container" style="padding-top:30px;">
+<div class="container" style="padding-top:30px; width: 320px;">
   <div class="main-content">
-    <h1>Soartex Fanver <small>Zip Manager</small></h1>
+    <h2>Zip Manager Login</h2>
     <hr>
-    <p>This system allows for complete control of the soartex modded patcher and zip archives. With this a user can sync a zip file from github and then also updated the patcher.json.All patcher.jsons can all be found here: <a href="http://files.soartex.net/zip-manager/data/patcher/">files.soartex.net/zip-manager/data/patcher/</a>This system allow for community members to updated zips and allow for soartex fanver users to get the latest textures. Enjoy the system!</p>
-    <h4>Contains</h4>
-    <ul>
-	  <li>Soartex 1.6.x</li>
-      <li>Soartex 1.5.x</li>
-      <li>Soartex 1.4.x</li>
-      <li>Soartex 1.3.x-pre</li>
-    </ul>
-    <?php
-	if (isset($loggedInUser)) {
-		// If the user is logged and is an admin or has the perm
-		if(isUserLoggedIn() && $loggedInUser->checkPermission(array(2,5))) {
-			echo '<hr>
-			<div class="pull-right">
-			<p>Please click here to procceed. <a class="btn btn-primary" href="./options">Procceed <i class=icon-th-list></i></a> </p>
-			</div>
-			<br>';
-		}
-	}
-	?>
+    <form action="login/VerifyLogin.php" method="post">
+      <input class="fullWidth" type="text" name="username" placeholder="Username">
+      <input class="fullWidth" type="password" name="password" placeholder="Password">
+      </br>
+      <button class="btn btn-success fullWidth" type="submit" name="submit"> Sign in </button>
+    </form>
   </div>
 </div>
-<!-- Footer -->
-<?php require 'assets/presets/footer.php'; ?>
 </body>
-<!-- Javascripts -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 </html>

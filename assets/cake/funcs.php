@@ -1,13 +1,4 @@
 <?php
-//Destroys a session as part of logout
-function destroySession($name)
-{
-	if(isset($_SESSION[$name]))	{
-		$_SESSION[$name] = NULL;
-		unset($_SESSION[$name]);
-	}
-}
-
 //Displays error and success messages
 function resultBlock($errors,$successes){
 	//Error block
@@ -44,42 +35,5 @@ function resultBlock($errors,$successes){
 function sanitize($str)
 {
 	return strtolower(strip_tags(trim(($str))));
-}
-
-//Functions that interact mainly with .users table
-//------------------------------------------------------------------------------
-//Check if a user is logged in
-function isUserLoggedIn()
-{
-	global $loggedInUser,$mysqli,$db_table_prefix;
-	$stmt = $mysqli->prepare("SELECT 
-		id,
-		password
-		FROM ".$db_table_prefix."users
-		WHERE
-		id = ?
-		AND 
-		password = ? 
-		AND
-		active = 1
-		LIMIT 1");
-	$stmt->bind_param("is", $loggedInUser->user_id, $loggedInUser->hash_pw);	
-	$stmt->execute();
-	$stmt->store_result();
-	$num_returns = $stmt->num_rows;
-	$stmt->close();
-	
-	if($loggedInUser == NULL){
-		return false;
-	}
-	else{
-		if ($num_returns > 0){
-			return true;
-		}
-		else{
-			destroySession("soartexUser");
-			return false;	
-		}
-	}
 }
 ?>

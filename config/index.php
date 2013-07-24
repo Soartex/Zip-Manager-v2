@@ -1,10 +1,12 @@
 <?php 
-$url_add="../"; 
-require '../assets/cake/cake.php';
-if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
-	header("Location: ../");
-	die();
-}
+// Helper Php for errors
+require "../assets/cake/funcs.php";
+//check user login
+session_start(); 
+if(!$_SESSION['logged']){ 
+    header("Location: ../index.php"); 
+    exit; 
+} 
 if(!isset($_GET['fileName'])){
 	header("Location: ../browse/"); 
     exit; 
@@ -30,7 +32,7 @@ if(!empty($_POST)){
 			ksort($patcher_json["mods"]);
 			//output file
 			$fp = fopen("../".$_SESSION['patcherConfig'], 'w');
-			fwrite($fp, json_encode($patcher_json, JSON_PRETTY_PRINT));
+			fwrite($fp, json_encode($patcher_json));
 			fclose($fp);
 			//redirect
 			header("Location: ../browse/"); 
@@ -67,7 +69,7 @@ if(!empty($_POST)){
 <!--Main Body/website-->
 <div class="container" style="padding-top:30px;">
   <div class="main-content">
-    <h1>Soartex Fanver <small>Zip Manager Updating</small></h1>
+    <h1>Zip Manager Updating</h1>
     <hr>
     <ul class="breadcrumb">
       <li><a href="../">Home</a> <span class="divider">/</span></li>
