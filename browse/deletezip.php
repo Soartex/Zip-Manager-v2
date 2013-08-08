@@ -21,7 +21,7 @@ if (file_exists($outputFile)) {
 		unset($patcher_json["mods"][$filename]);
 		//output file
 		$fp = fopen("../".$_SESSION['patcherConfig'], 'w');
-		fwrite($fp, json_encode($patcher_json));
+		fwrite($fp, json_encode($patcher_json, JSON_PRETTY_PRINT));
 		fclose($fp);
 	}
 }

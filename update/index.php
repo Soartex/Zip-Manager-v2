@@ -1,10 +1,10 @@
 <?php 
-//check user login
-session_start(); 
-if(!$_SESSION['logged']){ 
-    header("Location: ../index.php"); 
-    exit; 
-} 
+$url_add="../"; 
+require '../assets/cake/cake.php';
+if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
+	header("Location: ../");
+	die();
+}
 if(!isset($_GET['fileName'])){
 	header("Location: ../browse/"); 
     exit; 
@@ -26,6 +26,14 @@ if(!isset($_GET['fileName'])){
 <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-responsive.css" />
 <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/global.css" />
+<!--Javascript-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
+<script type="text/javascript">
+function toggleDiv(divId) {
+	$("#"+divId).toggle();
+}
+</script>
 </head>
 <body>
 <!--Header-->
@@ -33,7 +41,7 @@ if(!isset($_GET['fileName'])){
 <!--Main Body/website-->
 <div class="container" style="padding-top:30px;">
   <div class="main-content">
-    <h1>Zip Manager Updating Archive</h1>
+    <h1>Soartex Fanver <small>Zip Manager Updating</small></h1>
     <hr>
     <ul class="breadcrumb">
       <li><a href="../">Home</a> <span class="divider">/</span></li>

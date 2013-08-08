@@ -1,10 +1,10 @@
 <?php 
-//check user login
-session_start(); 
-if(!$_SESSION['logged']){ 
-    header("Location: ../index.php"); 
-    exit; 
-} 
+$url_add="../"; 
+require '../assets/cake/cake.php';
+if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
+	header("Location: ../");
+	die();
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -29,7 +29,7 @@ if(!$_SESSION['logged']){
 <!--Main Body/website-->
 <div class="container" style="padding-top:30px;">
   <div class="main-content">
-    <h1>Zip Manager Options</h1>
+    <h1>Soartex Fanver <small>Zip Manager Options</small></h1>
     <hr>
     <ul class="breadcrumb">
       <li><a href="../">Home</a> <span class="divider">/</span></li>

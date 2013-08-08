@@ -1,12 +1,10 @@
-<?php
-// Helper Php for errors
-require "../assets/cake/funcs.php";
-//check user login
-session_start(); 
-if(!$_SESSION['logged']){ 
-    header("Location: ../index.php"); 
-    exit; 
-} 
+<?php 
+$url_add="../"; 
+require '../assets/cake/cake.php';
+if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
+	header("Location: ../");
+	die();
+}
 
 if($_SESSION['gitUsername']===""){
 	header("Location: ../options/");
@@ -54,7 +52,7 @@ if(!empty($_POST)){
 <!--Main Body/website-->
 <div class="container" style="padding-top:30px;">
   <div class="main-content">
-    <h1>Zip Manager</h1>
+    <h1>Soartex Fanver <small>Zip Manager</small></h1>
     <hr>
     <ul class="breadcrumb">
       <li><a href="../">Home</a> <span class="divider">/</span></li>
