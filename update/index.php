@@ -1,10 +1,11 @@
-<?php 
-$url_add="../"; 
-require '../assets/cake/cake.php';
-if(!isUserLoggedIn() || !($loggedInUser->checkPermission(array(2,5)))) {
+<?php
+//check user login
+session_start();
+if (!$_SESSION['logged']) {
 	header("Location: ../");
-	die();
+	exit ;
 }
+
 if(!isset($_GET['fileName'])){
 	header("Location: ../browse/"); 
     exit; 

@@ -1,4 +1,3 @@
-<?php $url_add=""; require 'assets/cake/cake.php'; ?>
 <!-- Copyright Soartex Fanver Team -->
 <!DOCTYPE html>
 <html>
@@ -36,18 +35,11 @@
       <li>Soartex 1.4.x</li>
       <li>Soartex 1.3.x-pre</li>
     </ul>
-    <?php
-	if (isset($loggedInUser)) {
-		// If the user is logged and is an admin or has the perm
-		if(isUserLoggedIn() && $loggedInUser->checkPermission(array(2,5))) {
-			echo '<hr>
-			<div class="pull-right">
-			<p>Please click here to procceed. <a class="btn btn-primary" href="./options">Procceed <i class=icon-th-list></i></a> </p>
-			</div>
-			<br>';
-		}
-	}
-	?>
+    <hr>
+    <div class="pull-right">
+        <p>Please click here to procceed. <a class="btn btn-primary" href="./login">Procceed <i class=icon-th-list></i></a> </p>
+    </div>
+    <br>
   </div>
 </div>
 <!-- Footer -->
