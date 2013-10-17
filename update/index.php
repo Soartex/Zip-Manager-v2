@@ -98,7 +98,7 @@ function toggleDiv(divId) {
 			// Raw data spoiler
 			echo '<a href="javascript:toggleDiv(\'spoiler1\');" class="btn">Toggle Data</a>
     		<div id="spoiler1" class="well" style="display: none">';
-			echo print_r($githubRead);
+			print_r($githubRead);
 			echo '</div>
 			<br>
 			<br>';
